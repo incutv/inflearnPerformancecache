@@ -1,6 +1,6 @@
 
 <div align=center>
-	<h3>📚 "[백엔드 개발자 성능 개선 초석 다지기] 캐싱 활용 편 실습 코드입니다." 📚</h3>
+	<h3>📚 "[백엔드 개발자 성능 개선 초석 다지기] 캐싱 활용 편 코드입니다." 📚</h3>
 </div>
 <br><br>
 
@@ -12,6 +12,8 @@
 * Maven
 * intellij
 
+## "백엔드 개발자 성능 개선 초석 다지기" 캐싱 관련된 코드만 포함되어 있습니다.
+
 ### 본인 환경에 맞는 디비 설정정보를 application.properties로 수정 해주세요.
 
 ```properties
@@ -21,9 +23,37 @@ spring.datasource.username=
 spring.datasource.password=
 ```
 
+### notice 테이블
 
-### pom.xml에 아래에 xml 코드를 붙여서 동일한 환경에서 실습해주세요.
+```sql
+CREATE TABLE `notice` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `title` varchar(30) DEFAULT NULL,
+  `content` varchar(100) DEFAULT NULL,
+  `who` varchar(30) DEFAULT NULL,
+  `createDate` timestamp NOT NULL,
+  `updateDate` timestamp NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_notice_createDate` (`createDate`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb3;
+```
 
+
+### 아래에 pom.xml 전체 코드를 붙여서 동일한 환경에서 실습해주세요.
+
+* ehcache
+```xml
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-cache</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>net.sf.ehcache</groupId>
+        <artifactId>ehcache</artifactId>
+    </dependency>
+```
+
+* 전체 pom.xml
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -118,7 +148,7 @@ spring.datasource.password=
 
 ```
          
-### "백엔드 개발자 성능 개선 초석 다지기" 캐싱 관련된 코드만 포함되어 있습니다.
+
 
 
 
