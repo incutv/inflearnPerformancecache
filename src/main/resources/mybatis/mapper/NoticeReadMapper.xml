@@ -16,4 +16,10 @@
         LIMIT #{startIdx},10;
     </select>
 
+    <select id="findNoticesByDates"  resultType="com.example.performancecache.dto.Notice">
+        SELECT *
+        FROM notice
+        WHERE createDate BETWEEN #{startDate} AND #{endDate}
+    </select>
+
 </mapper>
